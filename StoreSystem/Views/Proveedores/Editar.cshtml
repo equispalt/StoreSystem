@@ -1,0 +1,51 @@
+﻿@model Proveedores
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Editar Proveedor
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Editar" asp-controller="Proveedores" method="post">
+
+            <input asp-for="id_proveedor" type="hidden" class="form-control">
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input asp-for="nombre_proveedor" type="text" class="form-control">
+                <span asp-validation-for="nombre_proveedor" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">NIT</label>
+                <input asp-for="nit_proveedor" type="text" class="form-control">
+                <span asp-validation-for="nit_proveedor" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Telefono</label>
+                <input asp-for="telefono_proveedor" type="text" class="form-control">
+                <span asp-validation-for="telefono_proveedor" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Direccion</label>
+                <input asp-for="direccion_proveedor" type="text" class="form-control">
+                <span asp-validation-for="direccion_proveedor" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Correo</label>
+                <input asp-for="correo_proveedor" type="text" class="form-control">
+                <span asp-validation-for="correo_proveedor" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Actualizar</button>
+            <a asp-action="Listar" asp-controller="Proveedores" class="btn btn-warning"> <i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+
+
+    </div>
+</div>

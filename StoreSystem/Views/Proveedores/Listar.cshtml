@@ -1,0 +1,51 @@
+﻿@model List<Proveedores>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        Listar Proveedores
+    </div>
+    <div class="card-body">
+
+        <a asp-action="Crear" asp-controller="Proveedores" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Crear Nuevo</a>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>NIT</th>
+                    <th>Telefono</th>
+                    <th>Direccion</th>
+                    <th>Correo</th>
+
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.nombre_proveedor)</td>
+                            <td>@(item.nit_proveedor)</td>
+                            <td>@(item.telefono_proveedor)</td>
+                            <td>@(item.direccion_proveedor)</td>
+                            <td>@(item.correo_proveedor)</td>
+
+                            <td>
+                                <a asp-action="Editar" asp-controller="Proveedores" class="btn btn-warning btn-sm" asp-route-idProveedor="@item.id_proveedor"><i class="bi bi-pencil-square"></i> Editar</a>
+                                <a asp-action="Eliminar" asp-controller="Proveedores" class="btn btn-danger btn-sm" asp-route-idProveedor="@item.id_proveedor"><i class="bi bi-trash"></i> Eliminar</a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
