@@ -2,7 +2,8 @@
 @using System.Security.Claims
 @{
     var currentUser = Context.User.Identity as ClaimsIdentity;
-    var userName = currentUser?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    var userName = currentUser?.FindFirst(ClaimTypes.Email)?.Value;
+    var userID = currentUser?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 }
 <ul class="navbar-nav">
     @if (Context.User.Identity.IsAuthenticated)

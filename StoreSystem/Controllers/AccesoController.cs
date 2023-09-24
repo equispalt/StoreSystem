@@ -139,7 +139,8 @@ namespace StoreSystem.Controllers
         {
             List<Claim> sesion = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, usuario.correoUsr)
+                new Claim(ClaimTypes.Email, usuario.correoUsr),
+                new Claim(ClaimTypes.NameIdentifier , usuario.idUsr.ToString())
             };
 
             ClaimsIdentity identidad = new(sesion, CookieAuthenticationDefaults.AuthenticationScheme);
