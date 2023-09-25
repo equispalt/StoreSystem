@@ -1,0 +1,31 @@
+﻿@model CategoriaProductos
+@{
+    ViewData["Title"] = "Eliminar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Eliminar Categoria de Clientes
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Eliminar" asp-controller="CategoriaProductos" method="post">
+
+            <input asp-for="id_categoria" type="hidden" class="form-control">
+
+            <div>
+                Antes de Eliminar, debe desasociar todos los productos de esta categoria.
+            </div>
+            <div class="alert alert-danger" role="alert">
+                ¿Eliminar la categoria: @Html.DisplayTextFor(m => m.nombre_categoria) ?
+            </div>
+
+
+            <button type="submit" class="btn btn-primary"><i class="bi bi-trash"></i> Eliminar</button>
+            <a asp-action="Listar" asp-controller="CategoriaProductos" class="btn btn-warning"> <i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+    </div>
+</div>
+

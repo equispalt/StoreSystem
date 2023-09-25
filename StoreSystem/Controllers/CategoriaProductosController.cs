@@ -44,9 +44,9 @@ namespace StoreSystem.Controllers
         }
 
 
-        public IActionResult Editar(int idCategoriaProducto)
+        public IActionResult Editar(int idCategoria)
         {
-            var oCategoriaProductos = _CategoriaProductosDatos.Buscar(idCategoriaProducto);
+            var oCategoriaProductos = _CategoriaProductosDatos.Buscar(idCategoria);
 
             return View(oCategoriaProductos);
         }
@@ -65,9 +65,9 @@ namespace StoreSystem.Controllers
                 return View();
         }
 
-        public IActionResult Eliminar(int idCategoriaProducto)
+        public IActionResult Eliminar(int idCategoria)
         {
-            var oCategoriaProductos = _CategoriaProductosDatos.Buscar(idCategoriaProducto);
+            var oCategoriaProductos = _CategoriaProductosDatos.Buscar(idCategoria);
 
             return View(oCategoriaProductos);
         }
