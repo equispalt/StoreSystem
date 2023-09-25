@@ -73,6 +73,80 @@ namespace StoreSystem.Datos
         return oCategoria;  
         }
 
+        public bool Crear(CategoriaProductos oCategoriaProductos)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("SP_CatCrear", connectionString);
 
+                    cmd.Parameters.AddWithValue("@nombreCategoria", oCategoriaProductos.nombre_categoria);
+                    cmd.Parameters.AddWithValue("@descripcionCategoria", oCategoriaProductos.descripcion_categoria);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
+
+        public bool Editar(CategoriaProductos oCategoriaProductos)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("SP_CatActualizar", connectionString);
+                    cmd.Parameters.AddWithValue("@idCategoria", oCategoriaProductos.id_categoria);
+                    cmd.Parameters.AddWithValue("@nombreCategoria", oCategoriaProductos.nombre_categoria);
+                    cmd.Parameters.AddWithValue("@descripcionCategoria", oCategoriaProductos.descripcion_categoria);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+
+            return rpta;
+        }
+
+        public bool Eliminar(CategoriaProductos oCategoriaProductos)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("SP_CatEliminar", connectionString);
+                    cmd.Parameters.AddWithValue("@idCategoria", oCategoriaProductos.id_categoria);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+
+            return rpta;
+        }
     }
 }
