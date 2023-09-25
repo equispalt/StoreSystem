@@ -1,0 +1,46 @@
+﻿@model List<CategoriaProductos>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Listar Categoria de Productos
+    </div>
+    <div class="card-body">
+
+        <a asp-action="Crear" asp-controller="CategoriaProductos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Crear Nuevo</a>
+        <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Tipo de Categoria</th>
+                    <th>Descripcion de Categoria</th>
+
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.nombre_categoria)</td>
+                            <td>@(item.descripcion_categoria)</td>
+
+                            <td>
+                                <a asp-action="Editar" asp-controller="CategoriaProductos" class="btn btn-warning btn-sm" asp-route-idcategoria="@item.id_categoria"><i class="bi bi-pencil-square"></i> Editar</a>
+                                <a asp-action="Eliminar" asp-controller="CategoriaProductos" class="btn btn-danger btn-sm" asp-route-idcategoria="@item.id_categoria"><i class="bi bi-trash"></i> Eliminar</a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
