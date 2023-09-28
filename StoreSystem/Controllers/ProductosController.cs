@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreSystem.Datos;
+using StoreSystem.Models;
 
 namespace StoreSystem.Controllers
 {
@@ -16,6 +17,27 @@ namespace StoreSystem.Controllers
         {
             var oLista = _ProductosDatos.Listar();
             return View(oLista);
+        }
+
+        public IActionResult Crear()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Crear(Productos oProducto)
+        {
+
+            var respuesta = _ProductosDatos.Crear(oProducto);
+
+            if (respuesta)
+            {
+                return RedirectToAction("Listar");
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }
