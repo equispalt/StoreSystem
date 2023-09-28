@@ -1,0 +1,56 @@
+﻿@model Productos
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        Editar Producto
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Editar" asp-controller="Productos" method="post">
+
+            <input asp-for="id_producto" type="hidden" class="form-control">
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input asp-for="nombre_producto" type="text" class="form-control">
+                <span asp-validation-for="nombre_producto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Marca</label>
+                <input asp-for="marca_producto" type="text" class="form-control">
+                <span asp-validation-for="marca_producto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Descripcion</label>
+                <input asp-for="descripcion_producto" type="text" class="form-control">
+                <span asp-validation-for="descripcion_producto" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Estado</label>
+                <input asp-for="estatus_producto" type="text" class="form-control">
+                <span asp-validation-for="estatus_producto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Categoria</label>
+                <input asp-for="nombre_categoria" type="text" class="form-control">
+                <span asp-validation-for="nombre_categoria" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Proveedor</label>
+                <input asp-for="nombre_proveedor" type="text" class="form-control">
+                <span asp-validation-for="nombre_proveedor" class="text-danger"></span>
+            </div>
+
+
+            <button type="submit" class="btn btn-primary"><i class="bi bi-pencil-square"></i> Actualizar</button>
+            <a asp-action="Listar" asp-controller="Productos" class="btn btn-warning"> <i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+
+
+    </div>
+</div>

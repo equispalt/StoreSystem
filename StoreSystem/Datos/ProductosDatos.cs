@@ -113,7 +113,7 @@ namespace StoreSystem.Datos
             return rpta;
         }
 
-        public bool Editar(Proveedores oProveedor)
+        public bool Editar(Productos oProducto)
         {
             bool rpta;
             try
@@ -122,13 +122,13 @@ namespace StoreSystem.Datos
                 {
                     connectionString.Open();
                     SqlCommand cmd = new SqlCommand("SP_ProdActualizar", connectionString);
-                    cmd.Parameters.AddWithValue("@idProveedor", oProveedor.id_proveedor);
-                    cmd.Parameters.AddWithValue("@nombreProveedor", oProveedor.nombre_proveedor);
-                    cmd.Parameters.AddWithValue("@nitProveedor", oProveedor.nit_proveedor);
-                    cmd.Parameters.AddWithValue("@telefonoProveedor", oProveedor.telefono_proveedor);
-                    cmd.Parameters.AddWithValue("@direccionProveedor", oProveedor.direccion_proveedor);
-                    cmd.Parameters.AddWithValue("@correoProveedor", oProveedor.correo_proveedor);
-
+                    cmd.Parameters.AddWithValue("@idProducto", oProducto.id_producto);
+                    cmd.Parameters.AddWithValue("@nombreProducto", oProducto.nombre_producto);
+                    cmd.Parameters.AddWithValue("@marcaProducto", oProducto.marca_producto);
+                    cmd.Parameters.AddWithValue("@descripcionProducto", oProducto.descripcion_producto);
+                    cmd.Parameters.AddWithValue("@estatusProducto", oProducto.estatus_producto);
+                    cmd.Parameters.AddWithValue("@categoriaId", oProducto.categoria_id);
+                    cmd.Parameters.AddWithValue("@proveedorId", oProducto.proveedor_id);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }

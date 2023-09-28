@@ -39,5 +39,26 @@ namespace StoreSystem.Controllers
                 return View();
             }
         }
+
+        public IActionResult Editar(int idProducto)
+        {
+            var oProducto = _ProductosDatos.Buscar(idProducto);
+
+            return View(oProducto);
+        }
+
+        [HttpPost]
+        public IActionResult Editar(Productos oProducto)
+        {
+
+            var respuesta = _ProductosDatos.Editar(oProducto);
+
+            if (respuesta)
+                return RedirectToAction("Listar");
+            else
+                return View();
+        }
+
+
     }
 }
