@@ -12,7 +12,7 @@ namespace StoreSystem.Datos
             _configuration = configuration;
         }
 
-        public List<CategoriaProductos> Listar()
+        public List<Productos> Listar()
         {
             var oLista = new List<Productos>();
             try
@@ -20,17 +20,21 @@ namespace StoreSystem.Datos
                 using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
                 {
                     connectionString.Open();
-                    SqlCommand cmd = new SqlCommand("SP_CatListar", connectionString);
+                    SqlCommand cmd = new SqlCommand("[SP_ProdListar]", connectionString);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     using (var dr = cmd.ExecuteReader())
                     {
                         while (dr.Read())
-                            oLista.Add(new CategoriaProductos()
+                            oLista.Add(new Productos()
                             {
-                                id_categoria = dr.GetInt32("id_categoria"),
+                                id_producto = dr.GetInt32("id_producto"),
+                                nombre_producto = dr["nombre_producto"].ToString(),
+                                marca_producto = dr["marca_producto"].ToString(),
+                                descripcion_producto = dr["descripcion_producto"].ToString(),
+                                estatus_producto = dr["estatus_producto"].ToString(),
                                 nombre_categoria = dr["nombre_categoria"].ToString(),
-                                descripcion_categoria = dr["descripcion_categoria"].ToString()
+                                nombre_proveedor = dr["nombre_proveedor"].ToString()
                             });
                     }
 

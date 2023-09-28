@@ -15,3 +15,4 @@
         public string nombre_proveedor { get; set; }
     }
 }
+            
