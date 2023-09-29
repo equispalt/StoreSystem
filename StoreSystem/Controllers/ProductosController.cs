@@ -54,6 +54,14 @@ namespace StoreSystem.Controllers
         {
             var oProducto = _ProductosDatos.Buscar(idProducto);
 
+
+            var LProveedores = _ProductosDatosDTOProv.ListarProveedores();
+            var LCategorias = _ProductosDatosDTOCat.ListarCategorias();
+
+            ViewBag.oProveedores = LProveedores;
+            ViewBag.oCategorias = LCategorias;
+
+
             return View(oProducto);
         }
 

@@ -69,7 +69,9 @@ namespace StoreSystem.Datos
                             oProducto.marca_producto = dr["marca_producto"].ToString();
                             oProducto.descripcion_producto = dr["descripcion_producto"].ToString();
                             oProducto.estatus_producto = dr["estatus_producto"].ToString();
+                            oProducto.id_categoria= dr.GetInt32("id_categoria");
                             oProducto.nombre_categoria = dr["nombre_categoria"].ToString();
+                            oProducto.id_proveedor = dr.GetInt32("id_proveedor");
                             oProducto.nombre_proveedor = dr["nombre_proveedor"].ToString();
                         }
                     }
