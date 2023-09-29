@@ -33,7 +33,7 @@
                 <input asp-for="estatus_producto" type="text" class="form-control">
                 <span asp-validation-for="estatus_producto" class="text-danger"></span>
             </div>
-            <div class="mb-3">
+@*             <div class="mb-3">
                 <label class="form-label">Categoria</label>
                 <input asp-for="categoria_id" type="text" class="form-control">
                 <span asp-validation-for="categoria_id" class="text-danger"></span>
@@ -42,6 +42,36 @@
                 <label class="form-label">Proveedor</label>
                 <input asp-for="proveedor_id" type="text" class="form-control">
                 <span asp-validation-for="proveedor_id" class="text-danger"></span>
+            </div> *@
+
+            <div class="mb-3">
+                <label class="form-label">Categoria</label>
+                <select class="form-control form-control-sm" asp-for="categoria_id">
+                    <option value="0">[Seleccione una categoria]</option>
+
+                    @if (@ViewBag.oCategorias != null)
+                    {
+                        @foreach (var item1 in @ViewBag.oCategorias)
+                        {
+                            <option value="@(item1.id_categoria)">@item1.nombre_categoria</option>
+                        }
+                    }
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Proveedor</label>
+                <select class="form-control form-control-sm" asp-for="proveedor_id">
+                    <option value="0">[Seleccione un proveedor]</option>
+
+                    @if (@ViewBag.oProveedores != null)
+                    {
+                        @foreach (var item2 in @ViewBag.oProveedores)
+                        {
+                            <option value="@(item2.id_proveedor)">@item2.nombre_proveedor</option>
+                        }
+                    }
+                </select>
             </div>
 
 

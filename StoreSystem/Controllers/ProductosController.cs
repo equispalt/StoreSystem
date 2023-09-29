@@ -7,10 +7,14 @@ namespace StoreSystem.Controllers
     public class ProductosController : Controller
     {
         public ProductosDatos _ProductosDatos;
+        public ProductosDatosDTO _ProductosDatosDTOProv;
+        public ProductosDatosDTO _ProductosDatosDTOCat;
 
         public ProductosController(IConfiguration _configuration) 
         {
-            _ProductosDatos = new ProductosDatos(_configuration);
+            _ProductosDatos = new ProductosDatos(_configuration);    
+            _ProductosDatosDTOProv = new ProductosDatosDTO(_configuration); 
+            _ProductosDatosDTOCat  = new ProductosDatosDTO(_configuration);
         }
 
         public IActionResult Listar()
@@ -21,6 +25,12 @@ namespace StoreSystem.Controllers
 
         public IActionResult Crear()
         {
+            var LProveedores = _ProductosDatosDTOProv.ListarProveedores();
+            var LCategorias = _ProductosDatosDTOCat.ListarCategorias();
+
+            ViewBag.oProveedores = LProveedores;
+            ViewBag.oCategorias = LCategorias;
+
             return View();
         }
 

@@ -11,8 +11,11 @@
         public string proveedor_id { get; set; }
 
         //Relacionado a tabla categoria de productos y proveedores
+        public int id_categoria { get; set; }
         public string nombre_categoria { get; set; }
+        public int id_proveedor { get; set; }
         public string nombre_proveedor { get; set; }
+
     }
 }
             
