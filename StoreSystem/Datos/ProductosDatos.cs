@@ -145,7 +145,7 @@ namespace StoreSystem.Datos
             return rpta;
         }
 
-        public bool Eliminar(Proveedores oProveedor)
+        public bool Eliminar(Productos oProducto)
         {
             bool rpta;
             try
@@ -154,7 +154,7 @@ namespace StoreSystem.Datos
                 {
                     connectionString.Open();
                     SqlCommand cmd = new SqlCommand("SP_ProdEliminar", connectionString);
-                    cmd.Parameters.AddWithValue("@idProveedor", oProveedor.id_proveedor);
+                    cmd.Parameters.AddWithValue("@idProducto", oProducto.id_producto);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.ExecuteNonQuery();
                 }

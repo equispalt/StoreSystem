@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreSystem.Datos;
 using StoreSystem.Models;
+using System.Data;
+using System.Reflection;
+using System.Security.Cryptography;
+using System;
 
 namespace StoreSystem.Controllers
 {
@@ -60,8 +64,6 @@ namespace StoreSystem.Controllers
 
             ViewBag.oProveedores = LProveedores;
             ViewBag.oCategorias = LCategorias;
-            ViewBag.oID = oProducto;
-
 
             return View(oProducto);
         }
@@ -71,6 +73,24 @@ namespace StoreSystem.Controllers
         {
 
             var respuesta = _ProductosDatos.Editar(oProducto);
+
+            if (respuesta)
+                return RedirectToAction("Listar");
+            else
+                return View();
+        }
+
+        public IActionResult Eliminar(int idProducto)
+        {
+            var oProducto = _ProductosDatos.Buscar(idProducto);
+
+            return View(oProducto);
+        }
+
+        [HttpPost]
+        public IActionResult Eliminar(Productos oProducto)
+        {
+            var respuesta = _ProductosDatos.Eliminar(oProducto);
 
             if (respuesta)
                 return RedirectToAction("Listar");
