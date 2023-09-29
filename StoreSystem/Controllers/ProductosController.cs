@@ -53,13 +53,14 @@ namespace StoreSystem.Controllers
         public IActionResult Editar(int idProducto)
         {
             var oProducto = _ProductosDatos.Buscar(idProducto);
-
+            
 
             var LProveedores = _ProductosDatosDTOProv.ListarProveedores();
             var LCategorias = _ProductosDatosDTOCat.ListarCategorias();
 
             ViewBag.oProveedores = LProveedores;
             ViewBag.oCategorias = LCategorias;
+            ViewBag.oID = oProducto;
 
 
             return View(oProducto);

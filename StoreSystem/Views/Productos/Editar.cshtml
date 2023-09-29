@@ -39,11 +39,13 @@
             <div class="mb-3">
                 <label class="form-label">Categoria</label>
                 <select class="form-control form-control-sm" asp-for="categoria_id">
+                    <option value="@Model.id_categoria">@Model.nombre_categoria</option>
                     @if (@ViewBag.oCategorias != null)
                     {
                         @foreach (var item1 in @ViewBag.oCategorias)
                         {
                             <option value="@(item1.id_categoria)">@item1.nombre_categoria</option>
+
                         }
                     }
                 </select>
@@ -52,6 +54,7 @@
             <div class="mb-3">
                 <label class="form-label">Proveedor</label>
                 <select class="form-control form-control-sm" asp-for="proveedor_id">
+                    <option value="@Model.id_proveedor">@Model.nombre_proveedor</option>
                     @if (@ViewBag.oProveedores != null)
                     {
                         @foreach (var item2 in @ViewBag.oProveedores)
