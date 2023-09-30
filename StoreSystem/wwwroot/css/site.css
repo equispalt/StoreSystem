@@ -16,3 +16,15 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.navbar .nav-item a.nav-link {
+    color: #333; /* Color de texto predeterminado */
+    text-decoration: none; /* Quitar subrayado predeterminado */
+    transition: background-color 0.2s; /* Transición suave para el fondo */
+}
+
+    /* Estilo cuando el puntero está sobre un enlace */
+    .navbar .nav-item a.nav-link:hover {
+        background-color: #60a3bc; /* Color de fondo cuando se pasa el puntero */
+        color: #007bff; /* Color de texto al pasar el puntero */
+    }
