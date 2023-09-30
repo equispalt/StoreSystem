@@ -12,7 +12,7 @@
 
         <a asp-action="Crear" asp-controller="Clientes" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Crear Nuevo</a>
         <hr />
-        <table class="table table-bordered">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>Nombre</th>
@@ -39,9 +39,11 @@
                             <td>@(item.telefono_cliente)</td>
                             <td>@(item.direccion_cliente)</td>
                             <td>@(item.correo_cliente)</td>
-
                             <td>
                                 <a asp-action="Editar" asp-controller="Clientes" class="btn btn-warning btn-sm" asp-route-idCliente="@item.id_cliente"><i class="bi bi-pencil-square"></i> Editar</a>
+
+                            </td>
+                            <td>
                                 <a asp-action="Eliminar" asp-controller="Clientes" class="btn btn-danger btn-sm" asp-route-idCliente="@item.id_cliente"><i class="bi bi-trash"></i> Eliminar</a>
                             </td>
                         </tr>
