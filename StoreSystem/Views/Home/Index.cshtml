@@ -2,92 +2,90 @@
     ViewData["Title"] = "Home Page";
 }
 
-
-@* <div class="text-center">
-    <h3 class="display-4">Welcome</h3>
-</div> *@
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="~/css/Home.css" rel="stylesheet">
 
 <div class="box">
 	<div class="container">
+
+		<div class="text-center">
+			<h3 class="display-4">Bienvenido, Elija una opción</h3>
+		</div>
+
+		<div class="text">
+			<span>Recuerde que puede explorar el menu completo, en la parte superior</span>
+		</div>
+
 		<div class="row">
 
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
 				<div class="box-part text-center">
-					<i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+					<img src="~/img/usuarios.png" alt="Usuarios" width="55" height="55">
 					<div class="title">
 						<a href="#"><h4>Usuarios</h4></a>
 					</div>
+					<div class="text">
+						<span>Administracion de Usuarios</span>
+					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 				<div class="box-part text-center">
-					<i class="fa fa-address-card-o fa-3x" aria-hidden="true"></i>
+					<img src="~/img/clientes.png" alt="Clientes" width="55" height="55">
 					<div class="title">
-						<a href="@Url.Action("Listar","Clientes")"><h4>Clientes</h4></a>
+						<a href="@Url.Action("Listar","Clientes")"><h4>Mis Clientes</h4></a>
 					</div>
 					<div class="text">
-						<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+						<span>Registrar, eliminar o actualizar detalles de productos</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
 				<div class="box-part text-center">
-					<i class="fa fa-truck fa-3x" aria-hidden="true"></i>
+					<img src="~/img/proveedores.png" alt="Proveedores" width="55" height="55">
 					<div class="title">
-						<a href="@Url.Action("Listar","Proveedores")"><h4>Proveedores</h4></a>
+						<a href="@Url.Action("Listar","Proveedores")"><h4>Proveedores Autorizados</h4></a>
 					</div>
 					<div class="text">
-						<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+						<span>Registrar, eliminar o actualizar detalles de proveedores</span>
 					</div>
 				</div>
 			</div>
 
 			<br />
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
 				<div class="box-part text-center">
-
-					<i class="fa fa-tasks fa-3x" aria-hidden="true"></i>
-
+					<img src="~/img/inventarios.png" alt="Inventarios" width="55" height="55">
 					<div class="title">
-						<a href="@Url.Action("Listar","Productos")"><h4>Productos</h4></a>
+						<a href="@Url.Action("MostrarExistencias","Existencias")"><h4>Ver Inventario</h4></a>
 					</div>
 					<div class="text">
-						<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-
-				<div class="box-part text-center">
-
-					<i class="fa fa-shopping-cart fa-3x" aria-hidden="true"></i>
-
-					<div class="title">
-						<a href="#"><h4>Facturacion</h4></a>
-					</div>
-					<div class="text">
-						<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+						<span>Registrar, eliminar o actualizar detalles de productos</span>
 					</div>
 				</div>
 			</div>
 
 			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
 				<div class="box-part text-center">
-					<i class="fa fa-file-pdf-o fa-3x" aria-hidden="true"></i>
+					<img src="~/img/facturarcion.png" alt="Facturacion" width="55" height="55">
+					<div class="title">
+						<a href="#"><h4>Realizar una Venta</h4></a>
+					</div>
+					<div class="text">
+						<span>Hacer una venta al contado u otro metodo</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+				<div class="box-part text-center">
+					<img src="~/img/reportes.png" alt="Reportes" width="55" height="55">
 					<div class="title">
 						<a href="#"><h4>Reportes</h4></a>
 					</div>
 					<div class="text">
-						<span>Lorem ipsum dolor sit amet, id quo eruditi eloquentiam. Assum decore te sed. Elitr scripta ocurreret qui ad.</span>
+						<span>Ver el reporte de Caja, Ventas o Existencias</span>
 					</div>
 				</div>
 			</div>
