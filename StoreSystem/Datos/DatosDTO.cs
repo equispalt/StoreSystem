@@ -5,15 +5,43 @@ using System.Data;
 
 namespace StoreSystem.Datos
 {
-    public class ProductosDatosDTO
+    public class DatosDTO
     {
         private readonly IConfiguration _configuration;
 
-        public ProductosDatosDTO(IConfiguration configuration)
+        public DatosDTO(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
+        public List<Productos> ListarProductos()
+        {
+            var oLista = new List<Productos>();
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("ListarProductos", connectionString);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                            oLista.Add(new Productos()
+                            {
+                                id_producto = dr.GetInt32("id_producto"),
+                                nombre_producto = dr["nombre_producto"].ToString()
+                            });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return oLista;
+        }
         public List<Productos> ListarProveedores()
         { 
         var oLista = new List<Productos>();

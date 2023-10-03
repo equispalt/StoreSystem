@@ -11,14 +11,14 @@ namespace StoreSystem.Controllers
     public class ProductosController : Controller
     {
         public ProductosDatos _ProductosDatos;
-        public ProductosDatosDTO _ProductosDatosDTOProv;
-        public ProductosDatosDTO _ProductosDatosDTOCat;
+        public DatosDTO _DatosDTOProv;
+        public DatosDTO _DatosDTOCat;
 
         public ProductosController(IConfiguration _configuration) 
         {
             _ProductosDatos = new ProductosDatos(_configuration);    
-            _ProductosDatosDTOProv = new ProductosDatosDTO(_configuration); 
-            _ProductosDatosDTOCat  = new ProductosDatosDTO(_configuration);
+            _DatosDTOProv = new DatosDTO(_configuration); 
+            _DatosDTOCat  = new DatosDTO(_configuration);
         }
 
         public IActionResult Listar()
@@ -29,8 +29,8 @@ namespace StoreSystem.Controllers
 
         public IActionResult Crear()
         {
-            var LProveedores = _ProductosDatosDTOProv.ListarProveedores();
-            var LCategorias = _ProductosDatosDTOCat.ListarCategorias();
+            var LProveedores = _DatosDTOProv.ListarProveedores();
+            var LCategorias  = _DatosDTOCat.ListarCategorias();
 
             ViewBag.oProveedores = LProveedores;
             ViewBag.oCategorias = LCategorias;
@@ -59,8 +59,8 @@ namespace StoreSystem.Controllers
             var oProducto = _ProductosDatos.Buscar(idProducto);
             
 
-            var LProveedores = _ProductosDatosDTOProv.ListarProveedores();
-            var LCategorias = _ProductosDatosDTOCat.ListarCategorias();
+            var LProveedores = _DatosDTOProv.ListarProveedores();
+            var LCategorias  = _DatosDTOCat.ListarCategorias();
 
             ViewBag.oProveedores = LProveedores;
             ViewBag.oCategorias = LCategorias;
