@@ -16,7 +16,7 @@ namespace StoreSystem.Models
         public float costo_ingreso { get; set; }
 
         [Required(ErrorMessage = "El campo Fecha de Vencimiento es obligatorio.")]
-        public DateOnly fecha_vencimiento { get; set; }
+        public DateTime fecha_vencimiento { get; set; }
 		public DateTime fecha_ingreso { get; set; }
 		public int usuario_id { get; set; }
 

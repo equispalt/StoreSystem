@@ -21,26 +21,28 @@
         <form asp-action="Crear" asp-controller="Ingresos" method="post">
 
 
-            @*             <div class="mb-3">
-            <label class="form-label">Estatus</label>
-            <select class="form-control form-control-sm" asp-for="estatus_producto">
-            <option value="ACTIVO">ACTIVO</option>
-            <option value="INACTIVO">INACTIVO</option>
-            </select>
-            </div> *@
+            <div class="mb-3">
+                <label class="form-label">Producto a ingresar</label>
+                <select class="form-control form-control-sm" asp-for="producto_id">
+                    <option value="0">[Seleccione un Producto]</option>
+
+                    @if (@ViewBag.oProductos != null)
+                    {
+                        @foreach (var item1 in @ViewBag.oProductos)
+                        {
+                            <option value="@(item1.id_producto)">@item1.nombre_producto</option>
+                        }
+                    }
+                </select>
+            </div>
 
             <div class="mb-3">
-                <label class="form-label">Nombre</label>
-                <input asp-for="nombre_producto" type="text" class="form-control">
-                <span asp-validation-for="nombre_producto" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Cantidad a ingresar</label>
+                <label class="form-label">Cantidad de unidades</label>
                 <input asp-for="cantidad_ingreso" type="number" class="form-control">
                 <span asp-validation-for="cantidad_ingreso" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label class="form-label">Costo de ingreso</label>
+                <label class="form-label">Costo de unidad </label>
                 <input asp-for="costo_ingreso" type="number" class="form-control">
                 <span asp-validation-for="costo_ingreso" class="text-danger"></span>
             </div>
@@ -52,7 +54,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Usuario que registra</label>
-                <input asp-for="@userID" type="number" class="form-control">
+                <Label asp-for="@userID" type="number" class="form-control">@userName</label>
                 <span asp-validation-for="usuario_id" class="text-danger"></span>
             </div>
 

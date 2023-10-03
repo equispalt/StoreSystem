@@ -7,24 +7,25 @@ namespace StoreSystem.Controllers
 	public class IngresosController : Controller
 	{
 		public IngresosDatos _IngresosDatos;
-
+		public DatosDTO _DatosDTOProd;
 		public IngresosController(IConfiguration _configuration)
 		{
 			_IngresosDatos = new IngresosDatos(_configuration);
+			_DatosDTOProd = new DatosDTO(_configuration);	
 		}
 
 		public IActionResult Crear()
 		{
-			return View();
+            var LProductos = _DatosDTOProd.ListarProductos();
+
+			ViewBag.oProductos = LProductos;
+
+            return View();
 		}
 
 		[HttpPost]
 		public IActionResult Crear(Ingresos oIngresos) 
 		{
-            if (!ModelState.IsValid)
-            {
-                return View();
-            }
 
             var respuesta = _IngresosDatos.Crear(oIngresos);
 
