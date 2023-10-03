@@ -1,0 +1,71 @@
+﻿﻿@using System.Text.Json
+@using System.Security.Claims
+@model Ingresos
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var currentUser = Context.User.Identity as ClaimsIdentity;
+    var userName = currentUser?.FindFirst(ClaimTypes.Email)?.Value;
+    var userID = currentUser?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+
+<div class="card">
+    <div class="card-header">
+        Ingreso de productos a inventario
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Crear" asp-controller="Ingresos" method="post">
+
+
+            @*             <div class="mb-3">
+            <label class="form-label">Estatus</label>
+            <select class="form-control form-control-sm" asp-for="estatus_producto">
+            <option value="ACTIVO">ACTIVO</option>
+            <option value="INACTIVO">INACTIVO</option>
+            </select>
+            </div> *@
+
+            <div class="mb-3">
+                <label class="form-label">Nombre</label>
+                <input asp-for="nombre_producto" type="text" class="form-control">
+                <span asp-validation-for="nombre_producto" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Cantidad a ingresar</label>
+                <input asp-for="cantidad_ingreso" type="number" class="form-control">
+                <span asp-validation-for="cantidad_ingreso" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Costo de ingreso</label>
+                <input asp-for="costo_ingreso" type="number" class="form-control">
+                <span asp-validation-for="costo_ingreso" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Fecha de vencimiento</label>
+                <input asp-for="fecha_vencimiento" type="date" class="form-control">
+                <span asp-validation-for="fecha_vencimiento" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Usuario que registra</label>
+                <input asp-for="@userID" type="number" class="form-control">
+                <span asp-validation-for="usuario_id" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="bi bi-person-up"></i> Guardar</button>
+            <a asp-action="MostrarExistencias" asp-controller="Existencias" class="btn btn-warning"><i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}
