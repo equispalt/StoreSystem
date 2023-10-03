@@ -43,7 +43,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label">Costo de unidad </label>
-                <input asp-for="costo_ingreso" type="number" class="form-control">
+                <input asp-for="costo_ingreso" type="text" class="form-control">
                 <span asp-validation-for="costo_ingreso" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -54,8 +54,9 @@
 
             <div class="mb-3">
                 <label class="form-label">Usuario que registra</label>
-                <Label asp-for="@userID" type="number" class="form-control">@userName</label>
-                <span asp-validation-for="usuario_id" class="text-danger"></span>
+                <select class="form-control form-control-sm" asp-for="usuario_id">
+                    <option value="@userID">@userName</option>
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary"><i class="bi bi-person-up"></i> Guardar</button>

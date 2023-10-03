@@ -12,7 +12,6 @@ namespace StoreSystem.Models
         public int cantidad_ingreso { get; set; }
 
         [Required(ErrorMessage = "El campo costo de ingreso es obligatorio.")]
-        [Range(0, float.MaxValue, ErrorMessage = "La cantidad = o mayor a 0.")]
         public float costo_ingreso { get; set; }
 
         [Required(ErrorMessage = "El campo Fecha de Vencimiento es obligatorio.")]
