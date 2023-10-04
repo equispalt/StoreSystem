@@ -5,9 +5,10 @@ namespace StoreSystem.Models
 	public class Ingresos
 	{
 		public int id_ingreso { get; set; }
-		public int producto_id { get; set; }
 
-        [Range(1, int.MaxValue, ErrorMessage = "La cantidad debe ser mayor a 0.")]
+        [Required(ErrorMessage = "El campo cantidad ingreso es obligatorio.")]
+        public int producto_id { get; set; }
+
         [Required(ErrorMessage = "El campo cantidad ingreso es obligatorio.")]
         public int cantidad_ingreso { get; set; }
 

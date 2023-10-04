@@ -23,7 +23,7 @@
 
             <div class="mb-3">
                 <label class="form-label">Producto a ingresar</label>
-                <select class="form-control form-control-sm" asp-for="producto_id">
+                <select class="form-control form-control-sm" asp-for="producto_id" required>
                     <option value="0">[Seleccione un Producto]</option>
 
                     @if (@ViewBag.oProductos != null)
@@ -38,17 +38,17 @@
 
             <div class="mb-3">
                 <label class="form-label">Cantidad de unidades</label>
-                <input asp-for="cantidad_ingreso" type="number" class="form-control">
+                <input asp-for="cantidad_ingreso" type="number" class="form-control" min="1" required>
                 <span asp-validation-for="cantidad_ingreso" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Costo de unidad </label>
-                <input asp-for="costo_ingreso" type="text" class="form-control">
+                <input asp-for="costo_ingreso" type="number" class="form-control" min="0" step="0.01" required>
                 <span asp-validation-for="costo_ingreso" class="text-danger"></span>
             </div>
             <div class="mb-3">
                 <label class="form-label">Fecha de vencimiento</label>
-                <input asp-for="fecha_vencimiento" type="date" class="form-control">
+                <input asp-for="fecha_vencimiento" type="date" class="form-control" required>
                 <span asp-validation-for="fecha_vencimiento" class="text-danger"></span>
             </div>
 
@@ -71,4 +71,18 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelector('form').addEventListener('submit', function (e) {
+                var selectedValue = document.querySelector('select[name="producto_id"]').value;
+                if (selectedValue === '0') {
+                    e.preventDefault();
+                    alert('Por favor, seleccione un producto válido.');
+                }
+            });
+        });
+    </script>
+
 }
+
