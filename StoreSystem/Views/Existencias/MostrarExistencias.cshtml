@@ -1,23 +1,58 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model List<Existencias>
 @{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="card">
+    <div class="card-header">
+        Existencia de Productos aptos para venta
+    </div>
+    <div class="card-body">
 
-<div class="modal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Título del modal</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p>El texto del cuerpo modal va aquí.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar cambios</button>
-            </div>
-        </div>
+        <a asp-action="Crear" asp-controller="Ingresos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Ingresar Productos a Inventario</a>
+        <hr />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th># Prod.</th>
+                    <th>Producto</th>
+                    <th>Descripcion</th>
+                    <th>Existencia</th>
+                    <th>Precio U.</th>
+                    <th>Categoria</th>
+                    <th>Proveedor</th>
+                    <th>Fecha Actualizacion</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.producto_id)</td>
+                            <td>@(item.nombre_producto)</td>
+                            <td>@(item.descripcion_producto)</td>
+                            <td>@(item.cantidad_existencia)</td>
+                            <td>Precio unitario</td>
+                            <td>@(item.nombre_categoria)</td>
+                            <td>@(item.nombre_proveedor)</td>
+                            <td>@(item.FechaUltimaActualizacion)</td>
+
+                            @*                             <td>
+                    <a asp-action="Editar" asp-controller="Productos" class="btn btn-warning btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-pencil-square"></i> Editar</a>
+                    </td>
+                    <td>
+                    <a asp-action="Eliminar" asp-controller="Productos" class="btn btn-danger btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-trash"></i> Eliminar</a>
+                    </td> *@
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
     </div>
 </div>
