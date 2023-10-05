@@ -38,5 +38,12 @@ namespace StoreSystem.Controllers
 				return View();
 			}
 		}
+
+		public IActionResult Listar() 
+		{
+			var oLista = _IngresosDatos.Listar();
+			return View(oLista);	
+		}
+
 	}
 }

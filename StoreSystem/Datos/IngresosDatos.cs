@@ -56,7 +56,7 @@ namespace StoreSystem.Datos
 				using (var conecctionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
 				{
 					conecctionString.Open();
-					SqlCommand cmd = new SqlCommand("[SP_IngresListar]", conecctionString);
+					SqlCommand cmd = new SqlCommand("[SP_IngreListar]", conecctionString);
 					cmd.CommandType = CommandType.StoredProcedure;
 
 					using (var dr = cmd.ExecuteReader())
@@ -65,12 +65,13 @@ namespace StoreSystem.Datos
 							oLista.Add(new Ingresos()
 							{
 								id_ingreso = dr.GetInt32("id_ingreso"),
+								compra_id = dr["compra_id"].ToString(),
 								nombre_producto= dr["nombre_producto"].ToString(),
                                 cantidad_ingreso = dr.GetInt32("cantidad_ingreso"),
                                 costo_ingreso	= dr.GetFloat("costo_ingreso"),
-                                fecha_vencimiento   = dr["fecha_vencimiento"].ToString(),
+                                fecha_vencimiento   = dr.GetDateTime("fecha_vencimiento"),
                                 comentario_ingreso = dr["comentario_ingreso"].ToString(),
-                                fecha_ingreso	= dr["fecha_ingreso"].ToString(),
+                                fecha_ingreso	= dr.GetDateTime("fecha_ingreso"),
                                 correoUsr	= dr["correoUsr"].ToString(),
                             });;
 					}

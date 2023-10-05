@@ -1,0 +1,58 @@
+﻿@model List<Ingresos>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        Listar Ingresos
+    </div>
+    <div class="card-body">
+
+        <a asp-action="Crear" asp-controller="Ingresos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Crear Nuevo</a>
+        <hr />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Orden Compra</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Costo</th>
+                    <th>Vencimiento</th>
+                    <th>Comentarios</th>
+                    <th>Ingreso</th>
+                    <th>Registró</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.compra_id)</td>
+                            <td>@(item.nombre_producto)</td>
+                            <td>@(item.cantidad_ingreso)</td>
+                            <td>@(item.costo_ingreso)</td>
+                            <td>@(item.fecha_vencimiento)</td>
+                            <td>@(item.comentario_ingreso)</td>
+                            <td>@(item.fecha_ingreso)</td>
+                            <td>@(item.correoUsr)</td>
+
+@*                             <td>
+                                <a asp-action="Editar" asp-controller="Productos" class="btn btn-warning btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-pencil-square"></i> Editar</a>
+                            </td>
+                            <td>
+                                <a asp-action="Eliminar" asp-controller="Productos" class="btn btn-danger btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-trash"></i> Eliminar</a>
+                            </td> *@
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
