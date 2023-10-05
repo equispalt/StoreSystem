@@ -20,6 +20,11 @@
 
         <form asp-action="Crear" asp-controller="Ingresos" method="post">
 
+            <div class="mb-3">
+                <label class="form-label"># Orden de compra</label>
+                <input asp-for="compra_id" type="text" class="form-control" required>
+                <span asp-validation-for="compra_id" class="text-danger"></span>
+            </div>
 
             <div class="mb-3">
                 <label class="form-label">Producto a ingresar</label>
@@ -50,6 +55,12 @@
                 <label class="form-label">Fecha de vencimiento</label>
                 <input asp-for="fecha_vencimiento" type="date" class="form-control" required>
                 <span asp-validation-for="fecha_vencimiento" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">comentarios del ingreso</label>
+                <input asp-for="comentario_ingreso" type="text" class="form-control" required>
+                <span asp-validation-for="comentario_ingreso" class="text-danger"></span>
             </div>
 
             <div class="mb-3">

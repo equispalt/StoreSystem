@@ -26,10 +26,12 @@ namespace StoreSystem.Datos
 					connectionString.Open();
 					SqlCommand cmd = new SqlCommand("SP_IngreCrear", connectionString);
 
+					cmd.Parameters.AddWithValue("@compraId", oIngresos.compra_id);
 					cmd.Parameters.AddWithValue("@productoId", oIngresos.producto_id);
 					cmd.Parameters.AddWithValue("@cantidadIngreso", oIngresos.cantidad_ingreso);
 					cmd.Parameters.AddWithValue("@costoIngreso", oIngresos.costo_ingreso);
 					cmd.Parameters.AddWithValue("@fechaVencimiento", oIngresos.fecha_vencimiento);
+					cmd.Parameters.AddWithValue("@comentarioIngreso", oIngresos.comentario_ingreso);
 					cmd.Parameters.AddWithValue("@usuarioId", oIngresos.usuario_id);
 					cmd.CommandType = CommandType.StoredProcedure;
 
