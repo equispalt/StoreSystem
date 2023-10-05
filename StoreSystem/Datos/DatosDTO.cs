@@ -31,7 +31,7 @@ namespace StoreSystem.Datos
                             oLista.Add(new Productos()
                             {
                                 id_producto = dr.GetInt32("id_producto"),
-                                nombre_producto = dr["nombre_producto"].ToString()
+                                nombre_producto = dr["ProductosFull"].ToString()
                             });
                     }
                 }
