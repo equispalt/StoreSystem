@@ -31,5 +31,6 @@ namespace StoreSystem.Models
 		public int id_producto { get; set; }
 		public string nombre_producto { get; set; }
 
+        public string correoUsr {  get; set; }  
 	}
 }
