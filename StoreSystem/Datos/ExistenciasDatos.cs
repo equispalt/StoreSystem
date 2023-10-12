@@ -34,6 +34,7 @@ namespace StoreSystem.Datos
                                 nombre_producto = dr["nombre_producto"].ToString(),
                                 descripcion_producto = dr["descripcion_producto"].ToString(),
                                 cantidad_existencia = dr.GetInt32("cantidad_existencia"),
+                                precio_unidad = dr.GetFloat("precio_unidad"),
                                 nombre_categoria = dr["nombre_categoria"].ToString(),
                                 nombre_proveedor = dr["nombre_proveedor"].ToString(),
                                 FechaUltimaActualizacion = dr.GetDateTime("FechaUltimaActualizacion")
