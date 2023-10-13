@@ -1,0 +1,56 @@
+﻿@model List<PrecioProductos>
+    @{
+        ViewData["Title"] = "Listar";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    <div class="card">
+        <div class="card-header">
+            Historico de Precio Vigentes
+        </div>
+        <div class="card-body">
+
+        <a asp-action="Crear" asp-controller="PrecioProductos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Agregar nuevo precio</a>
+            <hr />
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre</th>
+                        <th>Precio Unidad</th>
+                        <th>Fecha De Vigencia</th>
+                        <th>Fecha de Creacion</th>
+                        <th>usuario que configuro</th>
+                        <th>estado</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                            <td>@(item.producto_id)</td>
+                                <td>@(item.nombre_producto)</td>
+                                <td>Q. @(item.precio_unidad)</td>
+                                <td>@(item.fecha_vigencia)</td>
+                                <td>@(item.fecha_configuracion)</td>
+                                <td>@(item.correoUsr)</td>
+                                <td>@(item.estado)</td>
+
+     @*                            <td>
+                                <a asp-action="Editar" asp-controller="PrecioProductos" class="btn btn-warning btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-pencil-square"></i> Editar</a>
+                                </td>
+                                <td>
+                                <a asp-action="Eliminar" asp-controller="PrecioProductos" class="btn btn-danger btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-trash"></i> Eliminar</a>
+                                </td> *@
+                            </tr>
+
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
