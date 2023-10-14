@@ -1,0 +1,54 @@
+﻿@model List<Caja>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        Aperturas de Caja
+    </div>
+    <div class="card-body">
+
+        <a asp-action="Crear" asp-controller="Ingresos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Aperturara de Caja</a>
+        <hr />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th># Apertura.</th>
+                    <th>Fondo Inicial</th>
+                    <th>Fecha de apertura</th>
+                    <th>Fecha de Cierre</th>
+                    <th>Estado de caja</th>
+                    <th>usuario que aperturo</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.id_caja)</td>
+                            <td>Q. @(item.MontoInicial)</td>
+                            <td>@(item.fecha_apertura)</td>
+                            <td>@(item.fecha_cierre == null ? "Caja abierta" : item.fecha_cierre.ToString())</td>
+                            <td>@(item.estado_caja)</td>
+                            <td>@(item.correoUsr)</td>
+
+                            @*                             <td>
+                    <a asp-action="Editar" asp-controller="Productos" class="btn btn-warning btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-pencil-square"></i> Editar</a>
+                    </td>
+                    <td>
+                    <a asp-action="Eliminar" asp-controller="Productos" class="btn btn-danger btn-sm" asp-route-idProducto="@item.id_producto"><i class="bi bi-trash"></i> Eliminar</a>
+                    </td> *@
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
