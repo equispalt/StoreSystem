@@ -3,6 +3,7 @@
     ViewData["Title"] = "Listar";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="card">
     <div class="card-header">
         Aperturas de Caja
@@ -10,6 +11,7 @@
     <div class="card-body">
 
         <a asp-action="Crear" asp-controller="Ingresos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Aperturara de Caja</a>
+
         <hr />
         <table class="table table-bordered table-hover">
             <thead>
@@ -45,3 +47,18 @@
 
     </div>
 </div>
+
+<!-- Modal Trigger -->
+<a class="waves-effect waves-light btn modal-trigger" href="#modal1">Modal</a>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+    <div class="modal-content">
+        <h4>Modal Header</h4>
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
