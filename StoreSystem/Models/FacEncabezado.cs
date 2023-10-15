@@ -10,6 +10,5 @@ namespace StoreSystem.Models
         public int cliente_id { get; set; }
         public int usuario_id { get; set; }
         public float total_factura { get; set; }
-);
     }
 }

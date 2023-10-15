@@ -9,8 +9,17 @@
         Listar Cliente
     </div>
     <div class="card-body">
-
+        <P>
         <a asp-action="Crear" asp-controller="Clientes" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Crear Nuevo</a>
+        </P>
+
+        <form asp-controller="Clientes" asp-action="Listar">
+            <p>
+                Buscar por NIT: <input type="text" name="Buscar" class="form form-text" />
+                <input type="submit" value="Buscar" class="btn btn-sm btn-dark" />
+            </p>
+
+        </form>
         <hr />
         <table class="table table-bordered table-hover">
             <thead>

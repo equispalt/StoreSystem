@@ -1,0 +1,181 @@
+﻿@* ﻿@model List<FacturaDTO> *@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="card">
+    <div class="card-header">
+        Crear Orden De Compra
+    </div>
+    <div class="card-body">
+
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <label class="form-label"># Orden de compra</label>
+                    <label class="form-control form-control-sm" id="txtnumerooc">
+
+                        @if (@ViewBag.OCID != null)
+                        {
+                            @foreach (var item in @ViewBag.OCID)
+                            {
+                                <option value="@(item.idOrdenCompra)">@item.idOrdenCompra</option>
+                            }
+                        }
+                    </label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <label class="form-label">Proveedor</label>
+                    <select class="form-control form-control-sm" id="txtproveedor">
+                        <option value="0">[Seleccione un proveedor]</option>
+
+                        @if (@ViewBag.OCProveedores != null)
+                        {
+                            @foreach (var item1 in @ViewBag.OCProveedores)
+                            {
+                                <option value="@(item1.nombre_proveedor)">@item1.nombre_proveedor</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="mb-2">
+                <label for="form-label">Forma de Pago</label>
+                <select class="form-control form-control-sm" type="text" id="txtformapago">
+                    <option value="0">[Seleccione forma de pago]</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Credito">Credito</option>
+                    <option value="Cheque">Cheque</option>
+                </select>
+            </div>
+        </div>
+ 
+        <hr />
+
+        <div class="row align-items-end">
+            <div class="col-sm-3">
+                <div class="mb-2">
+                    <label class="form-label">Producto</label>
+                    <select class="form-control form-control-sm" id="txtproducto">
+                        <option value="0">[Seleccione un producto]</option>
+
+                        @if (@ViewBag.OCProductos != null)
+                        {
+                            @foreach (var item2 in @ViewBag.OCProductos)
+                            {
+                                <option value="@(item2.descripcion_producto)">@item2.descripcion_producto</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="mb-2">
+                    <label class="form-label">Cantidad</label>
+                    <input type="text" class="form-control form-control-sm" id="txtcantidad">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="mb-2">
+                    <label class="form-label">Precio</label>
+                    <input type="text" class="form-control form-control-sm" id="txtprecio">
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button class="btn btn-success mb-2 btn-sm" id="btnAgregar">Agregar</button>
+                <button class="btn btn-primary mb-2 btn-sm" id="btnTerminar">Terminar</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-bordered table-sm" id="tbProducto">
+                    <thead>
+                        <tr class="table-dark">
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio</th>
+                            <th scope="col">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        $("#btnAgregar").on("click", function () {
+            var total = parseFloat($("#txtprecio").val()) * parseFloat($("#txtcantidad").val())
+
+            $("#tbProducto tbody").append(
+                $("<tr>").append(
+                    $("<td>").text($("#txtproducto").val()),
+                    $("<td>").text($("#txtcantidad").val()),
+                    $("<td>").text($("#txtprecio").val()),
+                    $("<td>").text(total)
+                )
+            )
+            $("#txtproducto").val("")
+            $("#txtcantidad").val("")
+            $("#txtprecio").val("")
+            $("#txtproducto").focus();
+        })
+
+        $("#btnTerminar").on("click", function () {
+
+            var DetalleOrdenCompra = []
+            var total = 0;
+
+            $('table > tbody  > tr').each(function (index, tr) {
+
+                DetalleOrdenCompra.push(
+                    {
+                        descripcion_producto: $(tr).find('td:eq(0)').text(),
+                        Cantidad: parseInt($(tr).find('td:eq(2)').text()),
+                        PrecioUnitario: parseFloat($(tr).find('td:eq(1)').text()),
+                        PrecioTotal: parseFloat($(tr).find('td:eq(3)').text())
+                    }
+                )
+                total = total + parseFloat($(tr).find('td:eq(3)').text())
+            });
+
+            console.log(DetalleOrdenCompra)
+            console.log(total)
+
+            var OrdenCompra = {
+                // idOrdenCompra: $("#txtnumerooc").val(),
+                FormaPago: $("#txtformapago").val(),
+                nombre_proveedor: $("#txtproveedor").val(),
+                CostoTotal: total,
+                lstDetalleOrdenCompra: DetalleOrdenCompra
+            }
+
+            jQuery.ajax({
+                url: '@Url.Action("GuardarOC", "OrdenesCompras")',
+                type: "POST",
+                data: JSON.stringify(OrdenCompra),
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    console.log(data)
+                    if (data.respuesta) {
+                        alert("Orden De Compra Registrada");
+                        window.location.href = '@Url.Action("Index", "OrdenesCompras")';
+                    }
+                }
+            });
+        })
+    </script>
+}
