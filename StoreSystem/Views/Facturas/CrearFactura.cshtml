@@ -1,58 +1,86 @@
 ﻿@* ﻿@model List<FacturaDTO> *@
 @{
     ViewData["Title"] = "Home Page";
-}
+    var nitCliente = string.Empty;
+    var direccionCliente = string.Empty;
 
+}
 
 <div class="card">
     <div class="card-header">
-        Crear Orden De Compra
+        <label class="form-label"><strong>FACTURA #</strong></label>
+        <label class="form-label bold-text" id="txtnumerooc">
+
+            @if (@ViewBag.FacID != null)
+            {
+                @foreach (var item in @ViewBag.FacID)
+                {
+                    <option value="@(item.id_factura)">@item.id_factura</option>
+                }
+            }
+        </label>
     </div>
+
     <div class="card-body">
 
-        <div class="row">
+        <div class="row align-items-end">
+
             <div class="col-sm-4">
                 <div class="mb-2">
-                    <label class="form-label"># Orden de compra</label>
-                    <label class="form-control form-control-sm" id="txtnumerooc">
-
-                        @if (@ViewBag.OCID != null)
-                        {
-                            @foreach (var item in @ViewBag.OCID)
-                            {
-                                <option value="@(item.idOrdenCompra)">@item.idOrdenCompra</option>
-                            }
-                        }
-                    </label>
+                    <label for="form-label">NIT: </label>
+                    <label class="form-control form-control-sm">@nitCliente</label>
                 </div>
             </div>
+
             <div class="col-sm-4">
                 <div class="mb-2">
-                    <label class="form-label">Proveedor</label>
+                    <label for="form-label bold-text">Cliente: </label>
                     <select class="form-control form-control-sm" id="txtproveedor">
-                        <option value="0">[Seleccione un proveedor]</option>
+                        <option value="0">[Seleccione un Cliente]</option>
 
-                        @if (@ViewBag.OCProveedores != null)
+
+                        @if (@ViewBag.FacCliente != null)
                         {
-                            @foreach (var item1 in @ViewBag.OCProveedores)
+                            @foreach (var item1 in @ViewBag.FacCliente)
                             {
-                                <option value="@(item1.nombre_proveedor)">@item1.nombre_proveedor</option>
+                                <option value="@(item1.id_cliente)">@item1.nombre_cliente @item1.apellido_cliente</option>
+                                nitCliente = item1.nit_cliente;
+                                direccionCliente = item1.direccion_cliente;
                             }
                         }
                     </select>
                 </div>
             </div>
+
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <label for="form-label">Direccion: </label>
+                    <label class="form-control form-control-sm">@direccionCliente</label>
+                </div>
+            </div>
+
         </div>
 
-        <div class="col-sm-4">
-            <div class="mb-2">
-                <label for="form-label">Forma de Pago</label>
-                <select class="form-control form-control-sm" type="text" id="txtformapago">
-                    <option value="0">[Seleccione forma de pago]</option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Credito">Credito</option>
-                    <option value="Cheque">Cheque</option>
-                </select>
+        <div class="row align-items-end">
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <label for="form-label">Moneda</label>
+                    <select class="form-control form-control-sm" type="text" id="txtformapago">
+                        <option value="1">Quetzales</option>
+                        <option value="2">Dolares</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="mb-2">
+                    <label for="form-label">Forma de Pago</label>
+                    <select class="form-control form-control-sm" type="text" id="txtformapago">
+                        <option value="1">Efectivo</option>
+                        <option value="2">Credito</option>
+                        <option value="3">Tarjeta</option>
+                    </select>
+                </div>
             </div>
         </div>
  
@@ -61,7 +89,7 @@
         <div class="row align-items-end">
             <div class="col-sm-3">
                 <div class="mb-2">
-                    <label class="form-label">Producto</label>
+                    <label for="form-label">Producto</label>
                     <select class="form-control form-control-sm" id="txtproducto">
                         <option value="0">[Seleccione un producto]</option>
 
@@ -69,7 +97,7 @@
                         {
                             @foreach (var item2 in @ViewBag.OCProductos)
                             {
-                                <option value="@(item2.descripcion_producto)">@item2.descripcion_producto</option>
+                                <option value="@(item2.id_producto)">@item2.descripcion_producto</option>
                             }
                         }
                     </select>
@@ -77,19 +105,19 @@
             </div>
             <div class="col-sm-3">
                 <div class="mb-2">
-                    <label class="form-label">Cantidad</label>
+                    <label for="form-label">Cantidad</label>
                     <input type="text" class="form-control form-control-sm" id="txtcantidad">
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="mb-2">
-                    <label class="form-label">Precio</label>
+                    <label for="form-label">Precio</label>
                     <input type="text" class="form-control form-control-sm" id="txtprecio">
                 </div>
             </div>
             <div class="col-sm-3">
-                <button class="btn btn-success mb-2 btn-sm" id="btnAgregar">Agregar</button>
-                <button class="btn btn-primary mb-2 btn-sm" id="btnTerminar">Terminar</button>
+                    <button class="btn btn-success mb-2 btn-sm" id="btnAgregar">Agregar</button>
+                    <button class="btn btn-primary mb-2 btn-sm" id="btnTerminar">Terminar</button>
             </div>
         </div>
 
@@ -115,6 +143,24 @@
 
 @section Scripts{
     <script>
+
+        // javaescript para actualizar campos de cliente
+        $(document).ready(function () {
+            $("#txtproveedor").change(function () {
+                var selectedOption = $(this).find("option:selected");
+                var nitCliente = selectedOption.data("nit");
+                var direccionCliente = selectedOption.data("direccion");
+
+                // Actualiza los campos "NIT" y "Dirección"
+                $("#nitCliente").text(nitCliente);
+                $("#direccionCliente").text(direccionCliente);
+            });
+        });
+
+
+
+
+        // javascript para agregar productos al detalle
 
         $("#btnAgregar").on("click", function () {
             var total = parseFloat($("#txtprecio").val()) * parseFloat($("#txtcantidad").val())

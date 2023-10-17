@@ -15,7 +15,7 @@ namespace StoreSystem.Datos
             _configuration = configuration;
         }
 
-        public List<Clientes> Listar()
+        public List<Clientes> Listar(string nit=null)
         {
             var oLista = new List<Clientes>();
 
@@ -26,6 +26,12 @@ namespace StoreSystem.Datos
                     connectionString.Open();
                     SqlCommand cmd = new SqlCommand("SP_CliListar", connectionString);
                     cmd.CommandType = CommandType.StoredProcedure;
+
+                    if (!string.IsNullOrEmpty(nit))
+                    {
+                        // Si se proporciona un NIT, configurar el parámetro de búsqueda
+                        cmd.Parameters.Add(new SqlParameter("@nitCliente", nit));
+                    }
 
                     using (var dr = cmd.ExecuteReader())
                     {

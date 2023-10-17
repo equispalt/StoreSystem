@@ -16,11 +16,19 @@ namespace StoreSystem.Controllers
         }
 
         //Get: Listar
-        public IActionResult Listar()
+        public IActionResult Listar(string nit = null)
         {
-            // La vista Mostrara una lista de clientes	
-            var oLista = _ClienteDatos.Listar();
+            List<Clientes> oLista;
 
+            if (!string.IsNullOrEmpty(nit))
+            {
+                oLista = _ClienteDatos.Listar(nit);
+            }
+            else
+            {
+                // La vista Mostrara una lista de clientes	
+                oLista = _ClienteDatos.Listar();
+            }
             return View(oLista); // Devolver una vista con los datos obtenidos
         }
 
