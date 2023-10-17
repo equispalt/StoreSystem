@@ -35,7 +35,6 @@
                     <select class="form-control form-control-sm" id="txtproveedor">
                         <option value="0">[Seleccione un Cliente]</option>
 
-
                         @if (@ViewBag.FacCliente != null)
                         {
                             @foreach (var item1 in @ViewBag.FacCliente)
@@ -88,13 +87,12 @@
                 <div class="mb-2">
                     <label for="form-label">Producto</label>
                     <select class="form-control form-control-sm" id="txtproducto">
-                        <option value="0">[Seleccione un producto]</option>
-
-                        @if (@ViewBag.OCProductos != null)
+                        <option value="0">[Seleccione un Producto]</option>
+                        @if (@ViewBag.FacProducto != null)
                         {
-                            @foreach (var item2 in @ViewBag.OCProductos)
+                            @foreach (var item2 in @ViewBag.FacProducto)
                             {
-                                <option value="@(item2.id_producto)">@item2.descripcion_producto</option>
+                                <option value="@(item2.id_producto)" data-descripcion="@item2.descripcion_producto" data-precio="@item2.precio_unidad">@item2.descripcion_producto</option>
                             }
                         }
                     </select>
@@ -123,6 +121,7 @@
                 <table class="table table-bordered table-sm" id="tbProducto">
                     <thead>
                         <tr class="table-dark">
+                            <th scope="col">CodProd</th>
                             <th scope="col">Producto</th>
                             <th scope="col">Cantidad</th>
                             <th scope="col">Precio</th>
@@ -154,17 +153,27 @@
             });
         });
 
+        // javaescript para actualizar campo de precio
+        $("#txtproducto").change(function () {
+            var productoSeleccionado = $("#txtproducto option:selected");
+            var precioProducto = productoSeleccionado.data("precio");
 
+            // Actualiza el campo de precio
+            $("#txtprecio").val(precioProducto);
+        });
 
 
         // javascript para agregar productos al detalle
-
-        $("#btnAgregar").on("click", function () {
+                $("#btnAgregar").on("click", function () {
             var total = parseFloat($("#txtprecio").val()) * parseFloat($("#txtcantidad").val())
+
+            var productoSeleccionado = $("#txtproducto option:selected");
+            var descripcionProducto = productoSeleccionado.data("descripcion");
 
             $("#tbProducto tbody").append(
                 $("<tr>").append(
                     $("<td>").text($("#txtproducto").val()),
+                    $("<td>").text(descripcionProducto),
                     $("<td>").text($("#txtcantidad").val()),
                     $("<td>").text($("#txtprecio").val()),
                     $("<td>").text(total)
@@ -176,7 +185,8 @@
             $("#txtproducto").focus();
         })
 
-        $("#btnTerminar").on("click", function () {
+        //javascript para terminar de agregar productos al detalle
+                $("#btnTerminar").on("click", function () {
 
             var DetalleOrdenCompra = []
             var total = 0;
@@ -196,6 +206,9 @@
 
             console.log(DetalleOrdenCompra)
             console.log(total)
+
+
+
 
             var OrdenCompra = {
                 // idOrdenCompra: $("#txtnumerooc").val(),

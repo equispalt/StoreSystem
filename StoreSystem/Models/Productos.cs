@@ -15,6 +15,7 @@
         public string nombre_categoria { get; set; }
         public int id_proveedor { get; set; }
         public string nombre_proveedor { get; set; }
+        public float precio_unidad { get; set; }    
 
     }
 }

@@ -88,6 +88,37 @@ namespace StoreSystem.Datos
             return oLista;
         }
 
+        public List<Productos> ProductosFactura()
+        {
+            var oLista = new List<Productos>();
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_FacturaProducto]", connectionString);
+                    cmd.CommandType = CommandType.StoredProcedure;
 
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                            oLista.Add(new Productos()
+                            {
+                                id_producto = dr.GetInt32("id_producto"),
+                                nombre_producto = dr["nombre_producto"].ToString(),
+                                marca_producto = dr["marca_producto"].ToString(),
+                                descripcion_producto = dr["descripcion_producto"].ToString(),
+                                estatus_producto = dr["estatus_producto"].ToString(),
+                                precio_unidad = dr.GetFloat("precio_unidad")
+                            });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return oLista;
+        }
     }
 }

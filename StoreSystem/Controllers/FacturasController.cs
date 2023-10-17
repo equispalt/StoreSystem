@@ -21,16 +21,11 @@ namespace StoreSystem.Controllers
             var oFacCliente = _FacturaDatosDTO.ClientesFactura();
             ViewBag.FacCliente = oFacCliente;
 
+            var oFacProducto = _FacturaDatosDTO.ProductosFactura();
+            ViewBag.FacProducto = oFacProducto;
+
             return View();
         }
 
-        public IActionResult BuscarPorNit(string nit)
-        {
-            // Realiza la búsqueda en tu capa de datos y obtén los resultados
-            var FaCliente = _FacturaDatosDTO.ClientesFactura(nit);
-
-            // Devuelve una vista parcial o una vista con los datos del cliente encontrado
-            return PartialView("_ResultadoBusquedaCliente", FaCliente);
-        }
     }
 }
