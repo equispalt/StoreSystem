@@ -9,6 +9,11 @@ namespace StoreSystem.Models
         public string estado_factura { get; set; }
         public int cliente_id { get; set; }
         public int usuario_id { get; set; }
+        public int id_pago { get; set; } 
+        public int id_moneda { get; set; }  
         public float total_factura { get; set; }
+
+
+        public List<FacDetalle> lstFacDetalle { get; set; }
     }
 }
