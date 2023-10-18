@@ -13,6 +13,40 @@ namespace StoreSystem.Datos
             _configuration = configuration;
         }
 
+        public List<FacEncabezado> ListarFactura()
+        {
+            var oLista = new List<FacEncabezado>();
+
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_FacturaListar]", connectionString);
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                            oLista.Add(new FacEncabezado()
+                            {
+                                id_factura = dr.GetInt32("id_factura"),
+                                nit_cliente = dr["nit_cliente"].ToString(),
+                                forma_pago = dr["forma_pago"].ToString(),
+                                nombre_moneda = dr["nombre_moneda"].ToString(),
+                                total_factura = dr.GetFloat("total_factura"),
+                                fecha_factura = dr.GetDateTime("fecha_factura"),
+                                estado_factura = dr["estado_factura"].ToString()
+                            });
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return oLista;
+        }
         public List<FacturasDTO> CorrelativoFactura()
         {
             var oLista = new List<FacturasDTO>();

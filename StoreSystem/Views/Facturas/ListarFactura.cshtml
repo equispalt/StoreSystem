@@ -1,0 +1,53 @@
+﻿@model List<FacEncabezado>
+
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="card">
+    <div class="card-header">
+        FACTURAS EMITIDAS
+    </div>
+    <div class="card-body">
+
+@*         <a asp-action="Index" asp-controller="OrdenesCompras" class="btn btn-primary"><i class="bi bi-person-fill-add"></i> Crear orden de compra</a> *@
+               <hr />
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th># de Factura</th>
+                    <th>Nit Cliente</th>
+                    <th>Forma de Pago</th>
+                    <th>Moneda</th>
+                    <th>Total Factura</th>
+                    <th>Fecha de Emision</th>
+                    <th>Estado</th>
+                    <th>Accion</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.id_factura)</td>
+                            <td>@(item.nit_cliente)</td>
+                            <td>@(item.forma_pago)</td>
+                            <td>@(item.nombre_moneda)</td>
+                            <td>@(item.total_factura)</td>
+                            <td>@(item.fecha_factura)</td>
+                            <td>@(item.estado_factura)</td>
+                            <td>
+                                <a asp-action="VerFactura" asp-controller="Facturas" class="btn btn-warning btn-sm" asp-route-id_factura="@item.id_factura"><i class="bi bi-eye"></i> Detalles de Factura</a>
+                            </td>
+                        </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>

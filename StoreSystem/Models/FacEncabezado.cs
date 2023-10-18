@@ -15,5 +15,11 @@ namespace StoreSystem.Models
 
 
         public List<FacDetalle> lstFacDetalle { get; set; }
+
+        // Otras Referencias
+        public string nit_cliente { get; set; }
+        public string forma_pago { get; set; }
+        public string nombre_moneda { get; set; }
+        
     }
 }

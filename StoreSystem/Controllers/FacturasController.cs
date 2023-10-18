@@ -18,6 +18,26 @@ namespace StoreSystem.Controllers
             _cadenasql = _configuration;
         }
 
+        public IActionResult ListarFactura()
+        {
+            var oLista = _FacturaDatosDTO.ListarFactura();
+
+            return View(oLista);
+        }
+
+        //public IActionResult VerFactura(int idOrdenCompra)
+        //{
+        //    var oOCompra = _MDDatosDTOoc.BuscarOC(idOrdenCompra);
+        //    var oOCompraD = _MDDatosDTOocd.BuscarOCD(idOrdenCompra);
+
+        //    ViewBag.vOCompra = oOCompra;
+        //    ViewBag.vOCompraD = oOCompraD;
+
+
+        //    // Metodo que solo devuelve la vista
+        //    return View();
+        //}
+
         public IActionResult CrearFactura()
         {
             var oFacID = _FacturaDatosDTO.CorrelativoFactura();
@@ -33,7 +53,7 @@ namespace StoreSystem.Controllers
         }
 
         [HttpPost]
-        public JsonResult GuardarOC([FromBody] FacEncabezado body)
+        public JsonResult GuardarFactura([FromBody] FacEncabezado body)
         {
 
             XElement factura = new XElement("FacEncabezado",
