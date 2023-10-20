@@ -1,0 +1,149 @@
+﻿@model FacturasDTO
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="d-flex justify-content-between">
+    <h3>
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item = @ViewBag.VoFacEnc;
+            <option value="@(item.id_factura)">Factura # @item.id_factura</option>
+        }
+    </h3>
+    <div class="mb-2">
+        <h5 class="form-label">
+            @if (@ViewBag.VoFacEnc != null)
+            {
+                var item1 = @ViewBag.VoFacEnc;
+                <option value="@(item1.fecha_factura)">Fecha De Emisión: @item1.fecha_factura</option>
+            }
+        </h5>
+    </div>
+</div>
+<hr />
+
+<div class="mb-2">
+    <h5 class="form-label">
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item3 = @ViewBag.VoFacEnc;
+            <option value="@(item3.estado_factura)">Estado Factura: @item3.estado_factura</option>
+        }
+    </h5>
+</div>
+
+<h4 class="form-label">Cliente: </h4>
+
+<div>
+    <h5>
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item3 = @ViewBag.VoFacEnc;
+            <option value="@(item3.nombre_cliente)">@item3.nombre_cliente @item3.apellido_cliente</option>
+        }
+    </h5>
+</div>
+<div>
+    <h5>
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item3 = @ViewBag.VoFacEnc;
+            <option value="@(item3.direccion_cliente)">Direccion: @item3.direccion_cliente</option>
+        }
+    </h5>
+</div>
+
+
+<div class="mb-2">
+    <h5 class="form-label">
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item1 = @ViewBag.VoFacEnc;
+            <option value="@(item1.nit_cliente)">NIT: @item1.nit_cliente</option>
+        }
+    </h5>
+</div>
+
+
+
+
+<br>
+<h4 class="form-label">Detalles de la compra</h4>
+
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th >Cod. Producto</th>
+            <th>Descripcion Del Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (@ViewBag.VoFacDet != null)
+        {
+            @foreach (var detalle in @ViewBag.VoFacDet)
+            {
+                <tr>
+                    <td>@detalle.producto_id</td>
+                    <td>@detalle.descripcion_producto</td>
+                    <td>@detalle.cantidad_detalle</td>
+                    <td>Q. @detalle.precio_detalle</td>
+                    <td>Q. @detalle.subtotal_detalle</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<div class="text-right bg-light p-3 rounded">
+    <h5>
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item5 = @ViewBag.VoFacEnc;
+            <option value="@(item5.total_factura)"> <span style="font-weight: bold;">Total:</span> Q. @item5.total_factura</option>
+        }
+    </h5>
+</div>
+
+
+<br>
+<br>
+
+<div class="mb-2">
+    <h5 class="form-label">
+        @if (@ViewBag.VoFacEnc != null)
+        {
+            var item1 = @ViewBag.VoFacEnc;
+            <option value="@(item1.forma_pago)">Forma de pago: @item1.forma_pago</option>
+        }
+    </h5>
+</div>
+
+<br>
+<div style ="text-align: center;">
+    <h5 style="text-align: center;">Gracias por su compra</h5>
+</div>
+<hr>
+<div>
+
+    <button type="button" class="btn btn-primary" onclick="VerFactura()">Imprimir</button>
+
+</div>
+
+@section Scripts {
+    <script>
+        function VerFactura() {
+            window.print();
+        }
+    </script>
+}
+
+
+  

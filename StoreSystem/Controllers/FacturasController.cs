@@ -93,7 +93,18 @@ namespace StoreSystem.Controllers
             return Json(new { respuesta = true });
         }
 
+        public IActionResult VerFactura(int idfactura)
+        {
+            var oFacEnc = _FacturaDatosDTO.BuscarFacturaEnc(idfactura);
+            var oFacDet = _FacturaDatosDTO.BuscarFacturaDet(idfactura);
 
+            ViewBag.VoFacEnc = oFacEnc;
+            ViewBag.VoFacDet = oFacDet;
+
+
+            // Metodo que solo devuelve la vista
+            return View();
+        }
 
     }
 }
