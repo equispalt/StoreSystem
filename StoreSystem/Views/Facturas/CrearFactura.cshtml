@@ -164,32 +164,6 @@
         });
 
 
-        // // javascript para agregar productos al detalle
-        //         $("#btnAgregar").on("click", function () {
-        //     var total = parseFloat($("#txtprecio").val()) * parseFloat($("#txtcantidad").val())
-        //     total = total.toFixed(2);
-
-        //     var productoSeleccionado = $("#txtproducto option:selected");
-        //     var descripcionProducto = productoSeleccionado.data("descripcion");
-
-        //     $("#tbProducto tbody").append(
-        //         $("<tr>").append(
-        //             $("<td>").text($("#txtproducto").val()),
-        //             $("<td>").text(descripcionProducto),
-        //             $("<td>").text($("#txtcantidad").val()),
-        //             $("<td>").text($("#txtprecio").val()),
-        //             $("<td>").text(total)
-                           
-        //         )
-        //     )
-        //     $("#txtproducto").val("")
-        //     $("#txtcantidad").val("")
-        //     $("#txtprecio").val("")
-        //     $("#txtproducto").focus();
-
-        //     $("#txtproducto").val("0");
-        // })
-
         $("#btnAgregar").on("click", function () {
             var precio = parseFloat($("#txtprecio").val());
             var cantidad = parseFloat($("#txtcantidad").val());
@@ -202,6 +176,10 @@
             total = total.toFixed(2);
             var productoSeleccionado = $("#txtproducto option:selected");
             var descripcionProducto = productoSeleccionado.data("descripcion");
+
+            if (productoSeleccionado.val() === "0") {
+                return;
+            }
 
             var newRow = $("<tr>").append(
                 $("<td>").text($("#txtproducto").val()),
