@@ -1,4 +1,5 @@
 ﻿using MessagePack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using StoreSystem.Datos;
@@ -8,6 +9,7 @@ using System.Xml.Linq;
 
 namespace StoreSystem.Controllers
 {
+    [Authorize]
     public class FacturasController : Controller
     {
         public FacturasDatosDTO _FacturaDatosDTO;
@@ -55,7 +57,6 @@ namespace StoreSystem.Controllers
         [HttpPost]
         public JsonResult GuardarFactura([FromBody] FacEncabezado body)
         {
-
             XElement factura = new XElement("FacEncabezado",
                 //id_factura ES AUTOMATICO
                 // fecha_factura se genera desde el SP

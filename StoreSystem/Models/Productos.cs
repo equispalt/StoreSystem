@@ -1,4 +1,6 @@
-﻿namespace StoreSystem.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace StoreSystem.Models
 {
     public class Productos
     {
@@ -15,6 +17,8 @@
         public string nombre_categoria { get; set; }
         public int id_proveedor { get; set; }
         public string nombre_proveedor { get; set; }
+        [Required(ErrorMessage = "El campo precio es obligatorio")]
+        [Range(0.0, float.MaxValue, ErrorMessage ="El valor es invalido")]
         public float precio_unidad { get; set; }    
 
     }

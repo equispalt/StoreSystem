@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using StoreSystem.Datos;
 using StoreSystem.Models;
-using System.Configuration;
 
 namespace StoreSystem.Controllers
 {
+    [Authorize]
     public class ClientesController : Controller
     {
         private ClienteDatos _ClienteDatos;  // Declarar una instancia de ClienteDatos

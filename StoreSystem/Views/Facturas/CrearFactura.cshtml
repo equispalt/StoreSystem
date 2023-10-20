@@ -101,13 +101,13 @@
             <div class="col-sm-3">
                 <div class="mb-2">
                     <label for="form-label">Cantidad</label>
-                    <input type="text" class="form-control form-control-sm" id="txtcantidad">
+                    <input type="number" min="0" class="form-control form-control-sm" id="txtcantidad">
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="mb-2">
                     <label for="form-label">Precio</label>
-                    <input type="text" class="form-control form-control-sm" id="txtprecio">
+                    <input type="number" min="0" class="form-control form-control-sm" id="txtprecio">
                 </div>
             </div>
             <div class="col-sm-3">
@@ -191,9 +191,15 @@
         // })
 
         $("#btnAgregar").on("click", function () {
-            var total = parseFloat($("#txtprecio").val()) * parseFloat($("#txtcantidad").val());
-            total = total.toFixed(2);
+            var precio = parseFloat($("#txtprecio").val());
+            var cantidad = parseFloat($("#txtcantidad").val());
 
+            if (total < 1 || cantidad<1) {
+                return;
+            }
+
+            var total = precio * cantidad;
+            total = total.toFixed(2);
             var productoSeleccionado = $("#txtproducto option:selected");
             var descripcionProducto = productoSeleccionado.data("descripcion");
 
