@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 using StoreSystem.Models;
 using System.Data;
+using System.Security.Claims;
 
 namespace StoreSystem.Datos
 {
@@ -11,6 +12,32 @@ namespace StoreSystem.Datos
         public CajaDatos(IConfiguration configuration)
         {
             _configuration = configuration;
+        }
+        public bool VerificarCajaAbierta(int IdUsr)
+        {
+
+            bool cajaAbierta = false;
+            try
+            {
+                using (SqlConnection connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    SqlCommand cmd = new SqlCommand("[VerificarCajaAbierta]", connectionString);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@IdUsr", IdUsr);
+                    cmd.Parameters.Add("@estado", SqlDbType.Bit).Direction = ParameterDirection.Output;
+                    
+                    connectionString.Open();
+
+                    cmd.ExecuteNonQuery();
+
+                    cajaAbierta = Convert.ToBoolean(cmd.Parameters["@estado"].Value);
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return cajaAbierta;
         }
 
         public List<Caja> Estados()
@@ -69,6 +96,9 @@ namespace StoreSystem.Datos
             }
             return oLista;
         }
+
+
+
 
 
     }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using StoreSystem.Datos;
+using System.Security.Claims;
 
 namespace StoreSystem.Controllers
 {

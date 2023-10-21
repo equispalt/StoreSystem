@@ -235,7 +235,7 @@ namespace StoreSystem.Datos
             return listaDetalle;
         }
 
-        public bool AnularFactura(FacturasDTO oFactura)
+        public bool AnularFactura(FacturasDTO oFactura)     
         {
             bool rpta;
             try

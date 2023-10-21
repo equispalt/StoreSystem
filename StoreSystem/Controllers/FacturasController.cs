@@ -5,6 +5,7 @@ using Microsoft.Data.SqlClient;
 using StoreSystem.Datos;
 using StoreSystem.Models;
 using System.Data;
+using System.Security.Claims;
 using System.Xml.Linq;
 
 namespace StoreSystem.Controllers
@@ -13,11 +14,16 @@ namespace StoreSystem.Controllers
     public class FacturasController : Controller
     {
         public FacturasDatosDTO _FacturaDatosDTO;
+        public CajaDatos _CajaDatos;
+
+
         private readonly IConfiguration _cadenasql;
         public FacturasController(IConfiguration _configuration)
         { 
             _FacturaDatosDTO = new FacturasDatosDTO(_configuration);
+            _CajaDatos = new CajaDatos(_configuration);
             _cadenasql = _configuration;
+
         }
 
         public IActionResult ListarFactura()
@@ -26,6 +32,15 @@ namespace StoreSystem.Controllers
 
             return View(oLista);
         }
+
+        public JsonResult VerificarCorte()
+        {
+            int IdUsr = 1;
+            bool corteAbierto = _CajaDatos.VerificarCajaAbierta(IdUsr); // Reemplaza con tu lógica real
+
+            return Json(new { corteAbierto });
+        }
+
         public IActionResult CrearFactura()
         {
             var oFacID = _FacturaDatosDTO.CorrelativoFactura();
