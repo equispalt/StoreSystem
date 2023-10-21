@@ -10,7 +10,7 @@
     </div>
     <div class="card-body">
 
-        <a asp-action="Crear" asp-controller="Ingresos" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Aperturar de Caja</a>
+        <a asp-action="Crear" asp-controller="Caja" class="btn btn-success"><i class="bi bi-person-fill-add"></i> Apertura de Caja</a>
 
         <hr />
         <table class="table table-bordered table-hover">
@@ -22,6 +22,7 @@
                     <th>Fecha de Cierre</th>
                     <th>Estado de caja</th>
                     <th>usuario que aperturo</th>
+                    <th>Acciones</th>
 
                 </tr>
             </thead>
@@ -37,6 +38,11 @@
                             <td>@(item.fecha_cierre == null ? "Caja abierta" : item.fecha_cierre.ToString())</td>
                             <td>@(item.estado_caja)</td>
                             <td>@(item.correoUsr)</td>
+                            <td>
+                                <a asp-action="Editar" asp-controller="Caja" class="btn btn-danger btn-sm" asp-route-idcaja="@item.id_caja"><i class="bi bi-pencil-square"></i> Cerrar Caja</a>
+
+                            </td>
+
                         </tr>
 
                     }

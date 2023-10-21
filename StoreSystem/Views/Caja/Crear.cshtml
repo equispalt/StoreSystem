@@ -1,0 +1,42 @@
+﻿﻿@using System.Text.Json
+@using System.Security.Claims
+@model Caja
+@{
+    ViewData["Title"] = "Crear";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    var currentUser = Context.User.Identity as ClaimsIdentity;
+    var userName = currentUser?.FindFirst(ClaimTypes.Email)?.Value;
+    var userID = currentUser?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+
+<div class="card">
+    <div class="card-header">
+        APERTURA DE CAJA
+    </div>
+    <div class="card-body">
+
+        <form asp-action="Crear" asp-controller="Caja" method="post">
+
+
+            <div class="mb-3">
+                <label class="form-label">Fondo Inicial </label>
+                <input asp-for="MontoInicial" type="number" class="form-control" min="0" step="0.01" required>
+                <span asp-validation-for="MontoInicial" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Usuario al que se asigna la apertura de caja</label>
+                <select class="form-control form-control-sm" asp-for="usuario_id">
+                    <option value="@userID">@userName</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary"><i class="bi bi-person-up"></i> Aperturar Caja</button>
+            <a asp-action="Estados" asp-controller="Caja" class="btn btn-warning"><i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+
+    </div>
+</div>

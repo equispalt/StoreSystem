@@ -15,6 +15,88 @@ namespace StoreSystem.Datos
             
         }
 
+        public bool Crear(Caja oCaja)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectioString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectioString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_CajaCrear]", connectioString);
+
+                    cmd.Parameters.AddWithValue("@montoinicial", oCaja.MontoInicial);
+
+                    cmd.Parameters.AddWithValue("@usuario", oCaja.usuario_id);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
+
+        public bool Editar(Caja oCaja)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectioString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectioString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_Cajactualizar]", connectioString);
+                    cmd.Parameters.AddWithValue("@idcaja", oCaja.id_caja);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
+
+        public Caja Buscar(int idcaja)
+        {
+            var oCaja = new Caja();
+            try
+            {
+                using (var connectionString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectionString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_CajaBuscarID]", connectionString);
+                    cmd.Parameters.AddWithValue("@idcaja", idcaja);
+
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+
+                    using (var dr = cmd.ExecuteReader())
+                    {
+                        while (dr.Read())
+                        {
+                            oCaja.id_caja = dr.GetInt32("id_caja");
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+            }
+            return oCaja;
+        }
+
+
         public bool VerificarCajaAbierta(int IdUsr)
         {
    

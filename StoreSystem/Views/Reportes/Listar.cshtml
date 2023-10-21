@@ -1,0 +1,44 @@
+﻿@model List<Reportes>
+@{
+    ViewData["Title"] = "Listar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        Lista Productos Vendidos
+
+    </div>
+
+    <div class="card-body">
+
+
+        <hr />
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Categoria</th>
+                    <th>Subtotal</th>
+                    <th>Cantidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(item.nombre_categoria)</td>
+                            <td>@(item.subtotal_detalle)</td>
+                            <td>@(item.cantidad_detalle)</td>
+                                                    </tr>
+
+                    }
+                }
+            </tbody>
+
+        </table>
+
+    </div>
+</div>
+
