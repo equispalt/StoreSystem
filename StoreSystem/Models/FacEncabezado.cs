@@ -18,6 +18,8 @@ namespace StoreSystem.Models
 
         // Otras Referencias
         public string nit_cliente { get; set; }
+        public string nombre_cliente { get; set; }  
+
         public string forma_pago { get; set; }
         public string nombre_moneda { get; set; }
         

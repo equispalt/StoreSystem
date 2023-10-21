@@ -10,7 +10,6 @@
     </div>
     <div class="card-body">
 
-@*         <a asp-action="Index" asp-controller="OrdenesCompras" class="btn btn-primary"><i class="bi bi-person-fill-add"></i> Crear orden de compra</a> *@
                <hr />
         <table class="table table-bordered">
             <thead>
@@ -35,12 +34,15 @@
                             <td>@(item.nit_cliente)</td>
                             <td>@(item.forma_pago)</td>
                             <td>@(item.nombre_moneda)</td>
-                            <td>@(item.total_factura)</td>
+                            <td>Q. @(item.total_factura)</td>
                             <td>@(item.fecha_factura)</td>
                             <td>@(item.estado_factura)</td>
                             <td>
                                 <a asp-action="VerFactura" asp-controller="Facturas" class="btn btn-warning btn-sm" asp-route-idfactura="@item.id_factura"><i class="bi bi-eye"></i> Detalles de Factura</a>
+                                <a asp-action="AnularFactura" asp-controller="Facturas" class="btn btn-danger btn-sm" asp-route-idfactura="@item.id_factura"><i class="bi bi-x-circle"></i> Anular Factura</a>
+                            
                             </td>
+
                         </tr>
 
                     }

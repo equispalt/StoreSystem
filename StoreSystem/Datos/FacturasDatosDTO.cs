@@ -235,6 +235,30 @@ namespace StoreSystem.Datos
             return listaDetalle;
         }
 
+        public bool AnularFactura(FacturasDTO oFactura)
+        {
+            bool rpta;
+            try
+            {
+                using (var connectioString = new SqlConnection(_configuration.GetConnectionString("conexion")))
+                {
+                    connectioString.Open();
+                    SqlCommand cmd = new SqlCommand("[SP_ActualizarFacturaEnc]", connectioString);
+                    cmd.Parameters.AddWithValue("@idfactura", oFactura.id_factura);
+                    cmd.Parameters.AddWithValue("@estadofactura", oFactura.estado_factura);
+
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.ExecuteNonQuery();
+                }
+                rpta = true;
+            }
+            catch (Exception e)
+            {
+                string error = e.Message;
+                rpta = false;
+            }
+            return rpta;
+        }
 
     }
 }

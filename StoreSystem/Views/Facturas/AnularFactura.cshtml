@@ -1,0 +1,56 @@
+﻿@model FacturasDTO
+@{
+    ViewData["Title"] = "Editar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card">
+    <div class="card-header">
+        ANULACION DE FACTURA
+    </div>
+    <div class="card-body">
+
+        <form asp-action="AnularFactura" asp-controller="Facturas" method="post">
+
+            <input asp-for="id_factura" type="hidden" class="form-control">
+
+            <div class="mb-3">
+                <label class="form-label"><strong>FACTURA</strong></label>
+                <span class="form-control"><strong>No. de Factura:</strong> @Model.id_factura</span>
+                <span class="form-control"><strong>Fecha de Emision:</strong> @Model.fecha_factura</span>
+                
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>CLIENTE</strong></label>
+                <span class="form-control"><strong>Nombre:</strong> @Model.nombre_cliente @Model.apellido_cliente</span>
+                <span class="form-control"><strong>Direccion:</strong> @Model.direccion_cliente</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>TRANSACCION</strong></label>
+                <span class="form-control"><strong>Forma De Pago: </strong>@Model.forma_pago</span>
+                <span class="form-control"><strong>Modeda: </strong>@Model.nombre_moneda</span>
+                <span class="form-control"><strong>Total Factura: </strong>@Model.total_factura</span>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label"><strong>ESTADO DE FACTURA</strong></label>
+                <select class="form-control form-control-sm" asp-for="estado_factura">
+                    <option value="Anulado">@Model.estado_factura</option>
+                    <option value="Anulado">Anulado</option>
+                    }
+                </select>
+            </div>
+
+
+
+            <button type="submit" class="btn btn-danger"><i class="bi bi-pencil-square"></i> Anular Factura</button>
+            <a asp-action="ListarFactura" asp-controller="Facturas" class="btn btn-warning"> <i class="bi bi-list-ul"></i> Volver a la lista</a>
+        </form>
+
+
+    </div>
+</div>
+
+             

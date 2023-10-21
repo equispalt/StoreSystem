@@ -26,20 +26,6 @@ namespace StoreSystem.Controllers
 
             return View(oLista);
         }
-
-        //public IActionResult VerFactura(int idOrdenCompra)
-        //{
-        //    var oOCompra = _MDDatosDTOoc.BuscarOC(idOrdenCompra);
-        //    var oOCompraD = _MDDatosDTOocd.BuscarOCD(idOrdenCompra);
-
-        //    ViewBag.vOCompra = oOCompra;
-        //    ViewBag.vOCompraD = oOCompraD;
-
-
-        //    // Metodo que solo devuelve la vista
-        //    return View();
-        //}
-
         public IActionResult CrearFactura()
         {
             var oFacID = _FacturaDatosDTO.CorrelativoFactura();
@@ -104,6 +90,29 @@ namespace StoreSystem.Controllers
 
             // Metodo que solo devuelve la vista
             return View();
+        }
+
+        public IActionResult AnularFactura(int idfactura)
+        {
+            var ofactura = _FacturaDatosDTO.BuscarFacturaEnc(idfactura);
+
+            // Metodo que solo devuelve la vista
+            return View(ofactura);
+        }
+
+        [HttpPost]
+        public IActionResult AnularFactura(FacturasDTO oFactura)
+        {
+
+            // Metodo que recibe el objeto para guardarlo en DB
+            var respuesta = _FacturaDatosDTO.AnularFactura(oFactura);
+
+            if (respuesta)
+            {
+                return RedirectToAction("ListarFactura");
+            }
+            else
+                return View();
         }
 
     }
