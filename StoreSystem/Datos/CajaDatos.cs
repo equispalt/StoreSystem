@@ -8,14 +8,16 @@ namespace StoreSystem.Datos
     public class CajaDatos
     {
         private readonly IConfiguration _configuration;
-
+  
         public CajaDatos(IConfiguration configuration)
         {
             _configuration = configuration;
+            
         }
+
         public bool VerificarCajaAbierta(int IdUsr)
         {
-
+   
             bool cajaAbierta = false;
             try
             {

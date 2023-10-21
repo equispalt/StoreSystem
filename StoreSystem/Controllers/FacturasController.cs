@@ -33,10 +33,10 @@ namespace StoreSystem.Controllers
             return View(oLista);
         }
 
-        public JsonResult VerificarCorte()
+        public JsonResult VerificarCorte(string userID)
         {
-            int IdUsr = 1;
-            bool corteAbierto = _CajaDatos.VerificarCajaAbierta(IdUsr); // Reemplaza con tu lógica real
+            int usrID = Convert.ToInt32(userID);
+            bool corteAbierto = _CajaDatos.VerificarCajaAbierta(usrID); // Reemplaza con tu lógica real
 
             return Json(new { corteAbierto });
         }

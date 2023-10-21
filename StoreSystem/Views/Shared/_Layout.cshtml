@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using System.Security.Claims
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -88,6 +90,13 @@
         </nav>
     </header>
 
+    @{
+        var currentUser = Context.User.Identity as ClaimsIdentity;
+        var userID = currentUser?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    }
+
+    <div id="userID" data-userid="@userID"></div>
+
 
     <div class="container">
         <main role="main" class="pb-3">
@@ -101,14 +110,16 @@
         </div>
     </footer>
 
-
     <script>
         $(document).ready(function () {
             $("#crearFacturaLink").click(function (event) {
+                var userID = $("#userID").data("userid"); // Obtener el valor de data-userid
+
                 // Realiza una solicitud AJAX al servidor para verificar el estado del corte
                 $.ajax({
-                    url: "/Facturas/VerificarCorte",  // Reemplaza con la URL correcta de tu API
+                    url: "/Facturas/VerificarCorte",
                     type: "GET",
+                    data: { userID: userID }, // Pasar userID como parámetro
                     success: function (data) {
                         if (data.corteAbierto) {
                             // El corte está abierto, permite la navegación
@@ -128,6 +139,7 @@
             });
         });
     </script>
+
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
